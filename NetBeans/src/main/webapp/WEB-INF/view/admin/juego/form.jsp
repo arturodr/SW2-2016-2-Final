@@ -76,8 +76,10 @@
                         <div class="control-group">
                             <label class="control-label">Precio</label>
                             <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <%-- Agregar FORM INPUT --%> 
+                             <form:input readonly="true" class="span4" path="precio"/>
+                            <%-- Agregar FORM ERRORS --%>   
+                            <form:errors path="precio.idgenero" cssStyle="color:red" element="p" />
                         </div>
                     </div>  
 
@@ -96,7 +98,9 @@
                         <label class="control-label">Plataforma</label>
                         <div class="controls">
                             <%-- Agregar FORM SELECT --%>  
+                             <form:input readonly="true" class="span4" path="plataforma"/>
                             <%-- Agregar FORM ERRORS --%>  
+                            <form:errors path="plataforma.idplataforma" cssStyle="color:red" element="p" />
                         </div>
                     </div>    
 
@@ -104,15 +108,19 @@
                         <label class="control-label">Editora</label>
                         <div class="controls">
                             <%-- Agregar FORM SELECT --%>  
+                  <form:input readonly="true" class="span4" path="editora"/>
                             <%-- Agregar FORM ERRORS --%>  
+                    <form:errors path="editora.ideditora" cssStyle="color:red" element="p" />
                         </div>
                     </div>   
-
+ 
                     <div class="control-group">
                         <label class="control-label">Distribuidora</label>
                         <div class="controls">
                             <%-- Agregar FORM SELECT --%>  
+                    <form:input readonly="true" class="span4" path="distribuidora"/>
                             <%-- Agregar FORM ERRORS --%>  
+                    <form:errors path="distribuidora.iddistribuidora" cssStyle="color:red" element="p" />
                         </div>
                     </div>   
 

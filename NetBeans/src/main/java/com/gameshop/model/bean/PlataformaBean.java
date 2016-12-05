@@ -1,6 +1,7 @@
 package com.gameshop.model.bean;
 
 import java.io.Serializable;
+import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 public class PlataformaBean implements Serializable {
