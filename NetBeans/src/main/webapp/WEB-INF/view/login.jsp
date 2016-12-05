@@ -76,13 +76,13 @@
                             <div class="control-group">
                                 <label class="control-label">Correo</label>
                                 <div class="controls">
-                                    <input type="text" name="correo" placeholder="usuario@pucp.pe">
+                                    <input type="text" name="correo" id="correo" placeholder="usuario@pucp.pe">
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label">Password</label>
                                 <div class="controls">
-                                    <input type="password" name="password">
+                                    <input type="password" name="password" id="password">
                                 </div>
                             </div>
                             <div class="control-group">
