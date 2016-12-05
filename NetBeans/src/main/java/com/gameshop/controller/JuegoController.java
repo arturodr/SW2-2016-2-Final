@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
@@ -55,6 +57,16 @@ public class JuegoController {
         return "/user/juego/mygames";
     }
 
+    @RequestMapping(value = {"/juego/chat"}, method = RequestMethod.GET)
+    public String chat(Model model, @RequestParam(value = "action", required = false) String action, HttpSession session) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        UsuarioBean usuario = usuarioDAO.get(email);
+        model.addAttribute("usuarioBean", usuario);
+        return "/user/chat";
+    }
+    
+    
     @RequestMapping(value = {"/juego/search"}, method = RequestMethod.POST)
     public String search(Model model, @ModelAttribute("juego") JuegoBean juego, HttpSession session) {
         UsuarioBean usuarioBean = (UsuarioBean) session.getAttribute("usuarioBean");
