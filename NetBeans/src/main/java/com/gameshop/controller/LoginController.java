@@ -40,10 +40,15 @@ public class LoginController {
     public String home(Model model) {
         
         //TODO: Rutas
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        UsuarioBean usuario = usuarioDAO.get(username);
+        model.addAttribute("usuarioBean", usuario);
+                
         if (usuario.getAutorizacion().equalsIgnoreCase("ADMIN")) {
-            return "";
+             return "/admin/index";
         } else {
-            return "";
+            return "/user/index";
         }
     }
     

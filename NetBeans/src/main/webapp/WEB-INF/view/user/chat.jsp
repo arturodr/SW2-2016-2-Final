@@ -10,6 +10,17 @@
         <link rel="shortcut icon" href="<spring:url value="/resources/img/store_icon.png"/>">
         <link rel="stylesheet" href='<spring:url value="/resources/css/bootstrap.css"/>' />
         <script type='text/javascript' src='<spring:url value="/resources/js/jquery-1.11.1.min.js"/>'></script>
+        
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font: 13px Helvetica, Arial; }
+            form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+            form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+            form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+            #messages { list-style-type: none; margin: 0; padding: 0; }
+            #messages li { padding: 5px 10px; }
+            #messages li:nth-child(odd) { background: #eee; }
+        </style>
     </head>
 
     <body>
@@ -47,9 +58,15 @@
                     <li  class="active"><a href="#"><i class="icon-home icon-white"></i> Inicio</a></li>
                     <li><a href="<spring:url value='/juego'/>"><i class="icon-chevron-right"></i> Mis Juegos</a></li>
                     <li><a href="<spring:url value='/shop/catalogo'/>"><i class="icon-chevron-right"></i> Tienda</a></li>
-                    <li><a href="<spring:url value='/chat'/>"><i class="icon-chevron-right"></i> Chat</a></li>   <!--PARA IR A LA VISTA DEL CHAT A TRAVÉS DEL CHAT CONTROLLER-->
                 </ul>
             </div>
+            
+                <ul id="messages"></ul>
+                <form action="">
+                  <input id="m" autocomplete="off" /><button>Send</button>
+                </form>
+                
+                
             <div class="span2">
 
                 <img src="<spring:url value="/resources/img/wiiu.jpg"/>" class="span2">
@@ -88,5 +105,31 @@
                     Comentarios y/o sugerencias: <a href="mailto:jbarturen@pucp.pe">jbarturen@pucp.pe</a></p>
 
             </footer></div>
+                
+            
+                <!--EL CHAT SOLO ESTARÁ DISPONIBLE PARA USUARIOS (NO ADMIN) desde user/index.jsp-->
+                
+            <script src="/socket.io/socket.io.js"></script>
+                <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+                <script>
+                  var socket = io();
+                  $('form').submit(function(){
+                    socket.emit('chat message', $('#m').val());
+                    $('#m').val('');
+                    return false;
+                  });
+                </script>
+
+              <script>
+                  var socket = io();
+                  $('form').submit(function(){
+                    socket.emit('chat message', $('#m').val());
+                    $('#m').val('');
+                    return false;
+                  });
+                  socket.on('chat message', function(msg){
+                    $('#messages').append($('<li>').text(msg));
+                  });
+                </script>
     </body>
 </html>
