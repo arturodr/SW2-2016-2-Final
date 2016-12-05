@@ -53,10 +53,12 @@
 
             <div class="span10">
                 <%-- Formulario con los datos --%>   
-                <form:form class="form-horizontal" action="<%-- Agregar ACTION --%>" method="post" modelAttribute="<%-- Agregar MODEL ATTRIBUTE --%>">
+                <form:form class="form-horizontal" action="${pageContext.request.contextPath}/shop/save" method="post" modelAttribute="factura">
                     <div class="control-group">
                         <label class="control-label">Fecha</label>
                         <div class="controls">
+                           <form:input  class="form-control" path="fechaEnvio"/>
+                           <form:errors path="fechaEnvio" cssStyle="color:red" element="p" />
                             <%-- Agregar FORM INPUT --%>  
                             <%-- Agregar FORM ERRORS --%>  
                         </div>
@@ -64,6 +66,8 @@
                     <div class="control-group">
                         <label class="control-label">Tarjeta</label>
                         <div class="controls">
+                            <form:input  class="form-control" path="tarjeta"/>
+                           <form:errors path="tarjeta" cssStyle="color:red" element="p" />
                             <%-- Agregar FORM INPUT --%>  
                             <%-- Agregar FORM ERRORS --%>  
                         </div>
@@ -72,6 +76,8 @@
                     <div class="control-group">
                         <label class="control-label">Código Verificacion</label>
                         <div class="controls">
+                             <form:input  class="form-control" path="codigoVerificacion"/>
+                           <form:errors path="codigoVerificacion" cssStyle="color:red" element="p" />
                             <%-- Agregar FORM INPUT --%>  
                             <%-- Agregar FORM ERRORS --%>  
                         </div>
@@ -79,6 +85,8 @@
                     <div class="control-group">
                         <label class="control-label">Dirección</label>
                         <div class="controls">
+                            <form:input  class="form-control" path="direccion"/>
+                           <form:errors path="direccion" cssStyle="color:red" element="p" />
                             <%-- Agregar FORM INPUT --%>  
                             <%-- Agregar FORM ERRORS --%>  
                         </div>

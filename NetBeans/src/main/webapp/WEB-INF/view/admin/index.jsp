@@ -49,7 +49,8 @@
                     <li><a href="#"><i class="icon-chevron-right"></i> Géneros</a></li>
                     <li><a href="#"><i class="icon-chevron-right"></i> Distribuidoras</a></li>
                     <li><a href="#"><i class="icon-chevron-right"></i> Editoras</a></li>
-                    <li><a href="#"><i class="icon-chevron-right"></i> Plataformas</a></li>                  
+                    <li><a href="#"><i class="icon-chevron-right"></i> Plataformas</a></li>
+                    <li><a href="<spring:url value='http://localhost:3000'/>"><i class="icon-chevron-right"></i> Chat</a></li> 
                 </ul>
             </div>
             <div class="span2">

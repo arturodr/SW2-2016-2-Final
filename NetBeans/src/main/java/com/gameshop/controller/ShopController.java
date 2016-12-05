@@ -128,7 +128,11 @@ public class ShopController {
      */
     @RequestMapping(value = {"/shop/factura"}, method = RequestMethod.GET)
     public String view(Model model, @RequestParam(value = "id", required = false) Integer id, HttpSession session) {
-        return "";
+        
+        model.addAttribute("factura",new FacturaBean());
+        
+        
+        return "/user/shop/factura";
     }
     /*
      Completar Método que recibe DATOS del formulario de Factura
@@ -137,7 +141,10 @@ public class ShopController {
 
     @RequestMapping(value = {"/shop/save"}, method = RequestMethod.POST)
     public String save(@ModelAttribute("factura") FacturaBean factura, Model model, HttpSession session) {
-        return "";
+        
+        facturaDAO.insert(factura);
+        
+        return "redirect:/shop/catalogo";
     }
 
 }
