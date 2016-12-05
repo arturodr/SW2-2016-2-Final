@@ -49,7 +49,7 @@
             <%-- Lista de opciones --%> 
             <div class="span2">
                 <ul class="nav nav-list well">
-                    <li><a href="<spring:url value='/admin/home.do'/>"><i class="icon-home"></i> Home</a></li>
+                    <li><a href="<spring:url value='/home.do'/>"><i class="icon-home"></i> Home</a></li>
                     <li class="active"><a href="#"><i class="icon-chevron-right icon-white"></i> Juegos</a></li>
                     <li><a href="#"><i class="icon-chevron-right"></i> Géneros</a></li>
                     <li><a href="#"><i class="icon-chevron-right "></i> Distribuidoras</a></li>
