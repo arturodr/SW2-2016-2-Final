@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.gameshop.model.bean;
 
 import com.gameshop.model.validator.Fecha;
@@ -11,10 +7,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 
-/**
- *
- * @author joseluis
- */
+
 public class FacturaBean implements Serializable {    
     
     private int idfactura;

@@ -37,13 +37,13 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"/home.do"}, method = RequestMethod.GET)
-    public String home(Model model) {
-        
-        //TODO: Rutas
+    public String home(HttpSession session) {
+         UsuarioBean usuario= (UsuarioBean) session.getAttribute("usuarioBean");
+        //Se implementan las rutas correspondientes, según la Autorización
         if (usuario.getAutorizacion().equalsIgnoreCase("ADMIN")) {
-            return "";
+            return "/admin/index";
         } else {
-            return "";
+            return "/user/index";
         }
     }
     

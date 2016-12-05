@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gameshop.controller;
 
 import com.gameshop.model.bean.DistribuidoraBean;
@@ -32,10 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- *
- * @author joseluis
- */
 @Controller
 public class ShopController {
 
@@ -124,20 +115,30 @@ public class ShopController {
     }
 
     /*
-     Completar Método que muestra el formulario de Factura
+     Método que muestra el formulario de Factura
      */
     @RequestMapping(value = {"/shop/factura"}, method = RequestMethod.GET)
     public String view(Model model, @RequestParam(value = "id", required = false) Integer id, HttpSession session) {
-        return "";
+        FacturaBean facturaBean = new FacturaBean();
+        model.addAttribute("factura", facturaBean);
+        return "/juego/form";
+
     }
+
     /*
-     Completar Método que recibe DATOS del formulario de Factura
+     Método que recibe DATOS del formulario de Factura
      Si hay errores, redirigir al formulario. Si no, guardar Factura.
      */
-
     @RequestMapping(value = {"/shop/save"}, method = RequestMethod.POST)
-    public String save(@ModelAttribute("factura") FacturaBean factura, Model model, HttpSession session) {
-        return "";
+    public String save(@ModelAttribute("factura") FacturaBean factura, BindingResult result, Model model, HttpSession session) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("factura", factura);
+            return "/juego/form";
+        } else {
+            facturaDAO.insert(factura);
+            return "redirect:/factura/list";
+        }
     }
 
 }

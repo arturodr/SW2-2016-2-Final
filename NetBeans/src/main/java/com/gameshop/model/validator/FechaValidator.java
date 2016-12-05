@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.gameshop.model.validator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-/**
- *
- * @author joseluis
- */
+
 public class FechaValidator implements ConstraintValidator<Fecha, String> {
 
     @Override
@@ -20,9 +13,15 @@ public class FechaValidator implements ConstraintValidator<Fecha, String> {
 
     @Override
     public boolean isValid(String fechaValue, ConstraintValidatorContext ctx) {
-        /*
-        Completar Validador de Fecha
-        */
-        return false;
+        if (fechaValue == null || fechaValue.trim().length() == 0) {
+            return false;
+        } //validación de que sea un numero Double
+        else if (fechaValue.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")) {
+            // Si cumple la validación retorna TRUE
+            return true;
+        } else {
+            // Si no cumple la cumple retorna FALSE
+            return false;
+        }
     }
 }
