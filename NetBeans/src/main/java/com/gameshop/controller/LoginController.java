@@ -4,6 +4,7 @@ import com.gameshop.model.bean.JuegoBean;
 import com.gameshop.model.bean.UsuarioBean;
 import com.gameshop.model.dao.UsuarioDAO;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -39,11 +40,21 @@ public class LoginController {
     @RequestMapping(value = {"/home.do"}, method = RequestMethod.GET)
     public String home(Model model) {
         
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        
+        UsuarioBean usuario = usuarioDAO.get(username);
+        model.addAttribute("usuarioBean", usuario);
+    
         //TODO: Rutas
         if (usuario.getAutorizacion().equalsIgnoreCase("ADMIN")) {
-            return "";
+
+            model.addAttribute("usuario", new UsuarioBean());
+            return "/admin/index";
+
         } else {
-            return "";
+            return "/user/index";
         }
     }
     

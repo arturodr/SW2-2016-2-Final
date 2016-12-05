@@ -47,6 +47,7 @@
                     <li  class="active"><a href="#"><i class="icon-home icon-white"></i> Inicio</a></li>
                     <li><a href="<spring:url value='/juego'/>"><i class="icon-chevron-right"></i> Mis Juegos</a></li>
                     <li><a href="<spring:url value='/shop/catalogo'/>"><i class="icon-chevron-right"></i> Tienda</a></li>
+                    <li><a href="<spring:url value='http://localhost:3000'/>"><i class="icon-chevron-right"></i> Chat</a></li> 
                 </ul>
             </div>
             <div class="span2">
