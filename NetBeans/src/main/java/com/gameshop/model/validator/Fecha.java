@@ -19,7 +19,7 @@ import javax.validation.Payload;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Fecha {
-    /*
-     Completar Interfaz
-     */
+    String message() default "No es una fecha válida";
+    Class<?>[] groups() default {};
+    Class<? extends Payload>[] payload() default {};
 }

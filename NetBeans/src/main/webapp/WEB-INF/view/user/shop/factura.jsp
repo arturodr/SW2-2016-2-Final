@@ -57,30 +57,30 @@
                     <div class="control-group">
                         <label class="control-label">Fecha</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:input class="form-control" path="fechaEnvio" placeholder="Fecha"/>
+                            <form:errors path="fechaEnvio" cssStyle="color:red" element="p" /> 
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Tarjeta</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:input class="form-control" path="tarjeta" placeholder="Tarjeta"/>
+                            <form:errors path="tarjeta" cssStyle="color:red" element="p" />  
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">Código Verificacion</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:input class="form-control" path="codigoVerificacion" placeholder="Codigo Verificacion"/>
+                            <form:errors path="codigoVerificacion" cssStyle="color:red" element="p" />   
                         </div>
                     </div>  
                     <div class="control-group">
                         <label class="control-label">Dirección</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:input class="form-control" path="direccion" placeholder="Codigo Direccion"/>
+                            <form:errors path="direccion" cssStyle="color:red" element="p" />     
                         </div>
                     </div>  
 
