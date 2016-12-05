@@ -6,7 +6,26 @@
         <security:http pattern="/resources/**" security="none" />
       
 	<security:http auto-config="true" use-expressions="true">
-            //TODO: implemente seguridad (no hay usuario en la DB)
+            <security:form-login login-page="/login.do"
+                login-processing-url=" /dologin.do" username-parameter="correo"
+                password-parameter="password" authentication-failure-url="/login.do?error=true"
+                default-target-url="/home.do" always-use-default-target="true" />
+            <security:intercept-url pattern="/login.do"
+			access="permitAll" />
+                
+                <security:intercept-url pattern="/home.do"
+			access="permitAll" />
+                 
+                <security:intercept-url pattern="/employee/list"
+                                        access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')" />  
+                   
+                <security:intercept-url pattern="/admin/juego"
+                                       access="hasRole('ROLE_ADMIN')" /> 
+              <security:access-denied-handler error-page="/accessdenied.do" />
+
+	      <security:logout logout-success-url="/login.do"
+			logout-url="/logout.do" delete-cookies="JSESSIONID" ></security:logout>
+            
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>

@@ -2,10 +2,13 @@ package com.gameshop.controller;
 
 import com.gameshop.model.bean.*;
 import com.gameshop.model.dao.*;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
@@ -123,6 +126,16 @@ public class JuegoController {
         }
 
         return "redirect:/admin/juego";
+    }
+    
+    // Se puede llamar al usuario usando web services 
+    
+     @RequestMapping(value = "/user/", method = RequestMethod.GET)
+    public ResponseEntity<List<UsuarioBean>> listUser(@RequestParam(value = "action", required = false) String action, HttpSession session) {
+        UsuarioBean usuarioBean = (UsuarioBean) session.getAttribute("usuarioBean");
+            List<UsuarioBean> usuarioList = new ArrayList<UsuarioBean>();
+            usuarioList.add(usuarioBean);
+    return new ResponseEntity<List<UsuarioBean>>(usuarioList, HttpStatus.OK);
     }
 
 }
