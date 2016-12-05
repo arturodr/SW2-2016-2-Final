@@ -1,20 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-        <security:http pattern="/resources/**" security="none" />
+    <security:http pattern="/resources/**" security="none" />
       
-	<security:http auto-config="true" use-expressions="true">
-            //TODO: implemente seguridad (no hay usuario en la DB)
-	</security:http>
-	<security:authentication-manager>
-		<security:authentication-provider>
-			<security:password-encoder hash="sha-256" />
-			<security:jdbc-user-service
-				data-source-ref="dataSource" role-prefix="ROLE_"
-				users-by-username-query="select correo, password, CASE enabled WHEN 1 THEN 'true' ELSE 'false' END from usuarios where correo=?"
-				authorities-by-username-query="select a.correo, a.autorizacion from usuarios a where a.correo =?" />
-		</security:authentication-provider>
-	</security:authentication-manager>
+    <security:http auto-config="true" use-expressions="true">
+        
+        <!--TODO: implemente seguridad (no hay usuario en la DB)-->
+        <security:form-login  login-page="/login.do"
+                              login-processing-url="/dologin.do" username-parameter="correo"
+                              password-parameter="identification" authentication-failure-url="/login.do?error=true"
+                              default-target-url="/home.do" always-use-default-target="true"/>
+    
+        <security:intercept-url pattern="/" access="permitAll" />
+    
+        <security:intercept-url pattern="/login.do"
+                                access="permitAll" />
+       
+        <security:intercept-url pattern="/accessdenied.do"      
+                                access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
+         
+        <security:intercept-url pattern="/home.do"
+                                access="hasAnyRole('ROLE_USER','ROLE_ADMIN')" />
+        
+        <security:intercept-url pattern="/user/**"
+                                access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />                
+        
+        <security:intercept-url pattern="/admin/**"
+                                access="hasRole('ROLE_ADMIN')" />
+                       
+        <security:access-denied-handler error-page="/accessdenied.do" />
+
+        <security:logout logout-success-url="/login.do" logout-url="/logout.do" delete-cookies="JSESSIONID"></security:logout>
+            
+    </security:http>
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder hash="sha-256" />
+            <security:jdbc-user-service
+                data-source-ref="dataSource" role-prefix="ROLE_"
+                users-by-username-query="select correo, password, CASE enabled WHEN 1 THEN 'true' ELSE 'false' END from usuarios where correo=?"
+                authorities-by-username-query="select a.correo, a.autorizacion from usuarios a where a.correo =?" />
+        </security:authentication-provider>
+    </security:authentication-manager>
 </beans>

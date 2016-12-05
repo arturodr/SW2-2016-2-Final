@@ -38,12 +38,15 @@ public class LoginController {
 
     @RequestMapping(value = {"/home.do"}, method = RequestMethod.GET)
     public String home(Model model) {
-        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String correo = auth.getName();
+        UsuarioBean usuarioBean = usuarioDAO.get(correo);
+        model.addAttribute("usuarioBean", usuarioBean);
         //TODO: Rutas
-        if (usuario.getAutorizacion().equalsIgnoreCase("ADMIN")) {
-            return "";
+        if (usuarioBean.getAutorizacion().equalsIgnoreCase("ADMIN")) {
+            return "/admin/index";
         } else {
-            return "";
+            return "/user/index";
         }
     }
     
