@@ -127,7 +127,7 @@ public class ShopController {
      Completar Método que muestra el formulario de Factura
      */
     @RequestMapping(value = {"/shop/factura"}, method = RequestMethod.GET)
-    public String view(Model model, @RequestParam(value = "id", required = false) Integer id, HttpSession session) {
+    public String view(Model model, @RequestParam(value = "id", required = false) Integer id, HttpSession session) {      
         return "";
     }
     /*

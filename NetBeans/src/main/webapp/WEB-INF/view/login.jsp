@@ -103,8 +103,29 @@
                         <a href="#">Reenviar Código de Activación</a>
                     </div>
                 </div>
-
-
+                <!--CHAT-->
+                <div class="col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="background-color: #1b6d85;"><h4 style="color: white">
+                                <span class="glyphicon glyphicon-comment"></span> Chat</h4>              
+                        </div>
+                        <div id="panell2" class="panel-body">
+                            <ul id="chatt" class="chat">
+                            </ul>
+                        </div>
+                        <div id="panell" class="panel-footer">
+                            <form id="formmm" action="">
+                                <div class="input-group">
+                                    <input id="btn-input" type="text" class="form-control input-sm" placeholder="Escriba su mensaje aquí..." />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-warning btn-sm" id="btn-chat">
+                                            Send</button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -119,11 +140,168 @@
             </footer></div>
     </body>
 </html>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("body").css("display", "none");
-        $("body").fadeIn(2000);                                                                                      
+<style>
+    .chat
+    {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
 
-    });   
-  
+    .chat li
+    {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px dotted #B3A9A9;
+    }
+
+    .chat li.left .chat-body
+    {
+        margin-left: 60px;
+    }
+
+    .chat li.right .chat-body
+    {
+        margin-right: 60px;
+    }
+
+
+    .chat li .chat-body p
+    {
+        margin: 0;
+        color: #777777;
+    }
+
+    .panel .slidedown .glyphicon, .chat .glyphicon
+    {
+        margin-right: 5px;
+    }
+
+    .panel-body
+    {
+        overflow-y: scroll;
+        height: 250px;
+    }
+
+    ::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar
+    {
+        width: 12px;
+        background-color: #F5F5F5;
+    }
+
+    ::-webkit-scrollbar-thumb
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+    }
+
+</style>
+<script>
+    function updateScroll() {
+        var element = document.getElementById("panell2");
+        element.scrollTop = element.scrollHeight;
+    }
+</script>
+
+<script>
+    function table() {
+
+        $.getJSON("http://35.162.22.16:8080/Proyecto/chat/",
+                function (data) {
+                    var cad = "";
+                    $.each(data, function (key, val) {
+                        console.log(val);
+                        cad = cad + val.texto;
+                    });
+                    $("#chatt").append(cad);
+                    updateScroll();
+                });
+    }
+</script>
+
+<script>
+    $(document).on('click', '#btn-chat', function () {
+        var d = new Date();
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        var text = $("#btn-input").val();
+        text = text.replace("<", "&lt;");
+        text = text.replace(">", "&gt;");
+        var cad = "<li "+${usuarioBean.nombres}+" "+${usuarioBean.apellidos}+"class=\"left clearfix\"><span class=\"chat-img pull-left\">" +
+                "<img width=\"60\" height=\"60\" src=\"/Proyecto/descargar/imagen?ruta=" + "${usuarioBean.ruta.ruta}" + "\" alt=\"User Avatar\" class=\"img-circle\" /></span>" +
+                "<div class=\"chat-body clearfix\"><div class=\"header\"><strong class=\"primary-font\">" + "${usuarioBean.nombre}" +
+                "</strong> <small class=\"pull-right text-muted\"><span class=\"glyphicon glyphicon-time\"></span>" + strTime + "</small></div><p>" +
+                text + "</p></div></li>";
+
+        $.ajax({
+            url: "http://35.162.22.16:8080/Proyecto/chat/",
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify({"texto": cad}),
+            success: function (data) {
+                console.log(data);
+                table();
+                updateScroll();
+            }
+        });
+    });
+</script>
+
+<script>
+    table();
+    updateScroll();
+</script>
+
+
+<script>
+    var socket = io.connect('http://35.162.22.16:3000');
+    $('#formmm').submit(function () {
+        var d = new Date();
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        var text = $("#btn-input").val();
+        text = text.replace("<", "&lt;");
+        text = text.replace(">", "&gt;");
+        var cad = "<li"+${usuarioBean.nombres}+" "+${usuarioBean.apellidos}+"class=\"left clearfix\"><span class=\"chat-img pull-left\">" +
+                "<img width=\"60\" height=\"60\" src=\"/Proyecto/descargar/imagen?ruta=" + "${usuarioBean.ruta.ruta}" + "\" alt=\"User Avatar\" class=\"img-circle\" /></span>" +
+                "<div class=\"chat-body clearfix\"><div class=\"header\"><strong class=\"primary-font\">" + "${usuarioBean.nombre}" +
+                "</strong> <small class=\"pull-right text-muted\"><span class=\"glyphicon glyphicon-time\"></span>" + strTime + "</small></div><p>" +
+                text + "</p></div></li>";
+
+        socket.emit('chat message', cad);
+        $('#btn-input').val('');
+        return false;
+    });
+    socket.on('chat message', function (msg) {
+        $('#chatt').append(msg);
+        updateScroll();
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("body").css("display", "none");
+        $("body").fadeIn(2000);
+
+    });
+
 </script>
