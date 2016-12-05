@@ -24,7 +24,7 @@
                             </a>
                         </li>
                     </ul>
-                            <a href="<spring:url value='/logout.do'/>" class="btn pull-right">Cerrar Sessión</a>
+                    <a href="<spring:url value='/logout.do'/>" class="btn pull-right">Cerrar Sessión</a>
                 </div>
             </div>
         </div>
@@ -76,8 +76,8 @@
                         <div class="control-group">
                             <label class="control-label">Precio</label>
                             <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:input  class="span4" path="precio" />
+                            <form:errors path="precio" cssStyle="color:red" element="p" />
                         </div>
                     </div>  
 
@@ -95,24 +95,30 @@
                     <div class="control-group">
                         <label class="control-label">Plataforma</label>
                         <div class="controls">
-                            <%-- Agregar FORM SELECT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:select path="plataforma.idplataforma">
+                                <form:option value="0" label="Todos"/>
+                                <form:options items="${ListaPlataformas}" itemValue="idplataforma" itemLabel="nombre"/>
+                            </form:select>    
                         </div>
                     </div>    
 
                     <div class="control-group">
                         <label class="control-label">Editora</label>
                         <div class="controls">
-                            <%-- Agregar FORM SELECT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:select path="editora.ideditora" >
+                                <form:option value="0" label="Todos"/>
+                                <form:options items="${ListaEditoras}" itemValue="ideditora" itemLabel="nombre"/>
+                            </form:select>   
                         </div>
                     </div>   
 
                     <div class="control-group">
                         <label class="control-label">Distribuidora</label>
                         <div class="controls">
-                            <%-- Agregar FORM SELECT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+                            <form:select path="distribuidora.iddistribuidora">
+                                <form:option value="0" label="Todos"/>
+                                <form:options items="${ListaDistribuidoras}" itemValue="iddistribuidora" itemLabel="nombre"/>
+                            </form:select>    
                         </div>
                     </div>   
 

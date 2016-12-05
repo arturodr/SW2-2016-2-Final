@@ -20,9 +20,17 @@ public class FechaValidator implements ConstraintValidator<Fecha, String> {
 
     @Override
     public boolean isValid(String fechaValue, ConstraintValidatorContext ctx) {
-        /*
-        Completar Validador de Fecha
-        */
-        return false;
+        if (fechaValue == null || fechaValue.trim().length()==0) {
+            return false;
+        }        
+        //validamos que sea un numero (Double)
+        else if (fechaValue.matches("^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$")) {
+            // Cumple la validación retorna TRUE
+            return true;
+        } 
+        else {
+            // Si no cumple la validación retorna FALSE
+            return false;
+        }
     }
 }

@@ -128,16 +128,30 @@ public class ShopController {
      */
     @RequestMapping(value = {"/shop/factura"}, method = RequestMethod.GET)
     public String view(Model model, @RequestParam(value = "id", required = false) Integer id, HttpSession session) {
-        return "";
+        model.addAttribute("fechaEnvio", new FacturaBean().getFechaEnvio());
+        model.addAttribute("tarjeta", new FacturaBean().getTarjeta());
+        model.addAttribute("codigoVerificacion", new FacturaBean().getCodigoVerificacion());
+        model.addAttribute("direccion", new FacturaBean().getDireccion());
+        return "/user/shop/factura";
     }
+
     /*
      Completar Método que recibe DATOS del formulario de Factura
      Si hay errores, redirigir al formulario. Si no, guardar Factura.
      */
 
     @RequestMapping(value = {"/shop/save"}, method = RequestMethod.POST)
-    public String save(@ModelAttribute("factura") FacturaBean factura, Model model, HttpSession session) {
-        return "";
+    public String save(@ModelAttribute("factura") FacturaBean factura,BindingResult result, Model model, HttpSession session) {
+        if (result.hasErrors()) {
+            model.addAttribute("fechaEnvio", new FacturaBean().getFechaEnvio());
+            model.addAttribute("tarjeta", new FacturaBean().getTarjeta());
+            model.addAttribute("codigoVerificacion", new FacturaBean().getCodigoVerificacion());
+            model.addAttribute("direccion", new FacturaBean().getDireccion());
+            return "redirect:/shop/factura";
+        }else{
+            return "redirect:/shop/factura";
+        }
+
     }
 
 }
