@@ -6,8 +6,9 @@
         <security:http pattern="/resources/**" security="none" />
       
 	<security:http auto-config="true" use-expressions="true">
-            
+             
 	<security:form-login login-page="/login.do"
+        
                     login-processing-url="/dologin.do" username-parameter="correo"                    
                     password-parameter="password" authentication-failure-url="/login.do?error=true"                    
                     default-target-url="/home.do" always-use-default-target="true"  />
