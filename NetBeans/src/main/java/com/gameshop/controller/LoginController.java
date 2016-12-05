@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
+ 
 @Controller
 @SessionAttributes("usuarioBean")
 public class LoginController {
@@ -38,12 +38,15 @@ public class LoginController {
 
     @RequestMapping(value = {"/home.do"}, method = RequestMethod.GET)
     public String home(Model model) {
-        
         //TODO: Rutas
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String email = auth.getName();
+        UsuarioBean usuario = usuarioDAO.get(email);
+        model.addAttribute("usuarioBean", usuario);
         if (usuario.getAutorizacion().equalsIgnoreCase("ADMIN")) {
-            return "";
+            return "/admin/index"; 
         } else {
-            return "";
+            return "/user/index";
         }
     }
     

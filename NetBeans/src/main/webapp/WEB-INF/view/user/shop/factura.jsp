@@ -57,30 +57,38 @@
                     <div class="control-group">
                         <label class="control-label">Fecha</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+             <%-- Agregar FORM INPUT --%>  
+             <form:input readonly="true" class="span4" path="fechaEnvio"/>
+             <%-- Agregar FORM ERRORS --%>  
+             <form:errors path="fechaEnvio.idfechaEnvio" cssStyle="color:red" element="p" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Tarjeta</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+            <%-- Agregar FORM INPUT --%>
+            <form:input readonly="true" class="span4" path="tarjeta"/>        
+            <%-- Agregar FORM ERRORS --%>  
+            <form:errors path="tarjeta.idtarjeta" cssStyle="color:red" element="p" />
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label">Código Verificacion</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+             <%-- Agregar FORM INPUT --%>  
+             <form:input readonly="true" class="span4" path="codigoVerificacion"/> 
+             <%-- Agregar FORM ERRORS --%>  
+             <form:errors path="codigoVerificacion.idcodigoVerificacion" cssStyle="color:red" element="p" />
                         </div>
                     </div>  
                     <div class="control-group">
                         <label class="control-label">Dirección</label>
                         <div class="controls">
-                            <%-- Agregar FORM INPUT --%>  
-                            <%-- Agregar FORM ERRORS --%>  
+             <%-- Agregar FORM INPUT --%>  
+             <form:input readonly="true" class="span4" path="direccion"/> 
+             <%-- Agregar FORM ERRORS --%>  
+             <form:errors path="direccion.iddireccion" cssStyle="color:red" element="p" />
                         </div>
                     </div>  
 
@@ -93,7 +101,7 @@
                     </div>
                     <form:hidden path="idfactura"/>
                 </form:form>
-            </div>
+            </div> 
         </div>
 
         <%-- Footer --%>   
