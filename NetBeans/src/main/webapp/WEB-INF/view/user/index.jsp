@@ -20,10 +20,12 @@
                         <li class="active">
                             <a href="#">${usuarioBean.nombres} ${usuarioBean.apellidos} (${usuarioBean.correo})
                                 <sec:authorize access="hasRole('ROLE_ADMIN')"> - Administrador </sec:authorize>
+                               <sec:authorize access="hasRole('ROLE_EMPLOYEE')"> Employee </sec:authorize>
                             </a>
                         </li>
                     </ul>
-                    <a href="<spring:url value='logout.do'/>" class="btn pull-right">Cerrar Sessión</a>
+                        <a  class="btn btn-default" type="button" href="<spring:url value='/juego/chat'/>">CHAT</a>
+                        <a href="<spring:url value='logout.do'/>" class="btn pull-right">Cerrar Sessión</a>
                 </div>
             </div>
         </div>
@@ -75,6 +77,7 @@
                 <img src="<spring:url value="/resources/img/hongo.jpg"/>" class="span2">
 
             </div>
+             
 
 
         </div>
